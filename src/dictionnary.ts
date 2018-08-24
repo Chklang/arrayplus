@@ -1,15 +1,5 @@
 import { SubArray } from "./subarray";
 
-const getPropertyDescriptor = function (subject, name) {
-    var pd = Object.getOwnPropertyDescriptor(subject, name);
-    var proto = Object.getPrototypeOf(subject);
-    while (pd === undefined && proto !== null) {
-        pd = Object.getOwnPropertyDescriptor(proto, name);
-        proto = Object.getPrototypeOf(proto);
-    }
-    return pd;
-};
-
 export class Dictionnary<TypeKey extends string | number | boolean, TypeObject> extends SubArray<TypeObject> {
 
     public static create<TypeKey extends string | number | boolean, TypeObject>(callbackOnAdd?: (element: TypeObject) => TypeKey): Dictionnary<TypeKey, TypeObject> {
@@ -46,7 +36,7 @@ export class Dictionnary<TypeKey extends string | number | boolean, TypeObject> 
             this[calculatedKey] = element;
             return oldValue;
         } else {
-            super.push(element);
+            [].push.call(this, element);
             this[calculatedKey] = element;
             return undefined;
         }
@@ -82,14 +72,6 @@ export class Dictionnary<TypeKey extends string | number | boolean, TypeObject> 
         delete this[calculatedKey];
         this._length -= decallage;
         return element;
-    }
-
-    private superGet(property) {
-        return getPropertyDescriptor(Object.getPrototypeOf(this.constructor.prototype), property).value;
-    }
-    private superSet(property, value) {
-        console.log(getPropertyDescriptor(Object.getPrototypeOf(this.constructor.prototype), property));
-        return getPropertyDescriptor(Object.getPrototypeOf(this.constructor.prototype), property).value = value;
     }
 
     public get length(): number {

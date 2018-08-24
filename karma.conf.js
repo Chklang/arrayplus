@@ -12,6 +12,13 @@ module.exports = function (config) {
         preprocessors: {
             "**/*.ts": "karma-typescript"
         },
+        karmaTypescriptConfig: {
+            bundlerOptions: {
+                transforms: [
+                    require('karma-typescript-es6-transform')()
+                ]
+            }
+        },
         reporters: ["progress", "karma-typescript"],
         browsers: ["PhantomJS"],
     });

@@ -1,0 +1,1 @@
+export { Dictionnary } from './dictionnary';

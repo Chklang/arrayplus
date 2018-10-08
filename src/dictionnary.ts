@@ -26,7 +26,7 @@ export class Dictionnary<TypeKey extends string | number | boolean, TypeObject> 
         if (this[calculatedKey]) {
             // Already exists
             this.some((current: TypeObject, index: number) => {
-                if (current === this[index]) {
+                if (current === this[calculatedKey]) {
                     this[index] = element;
                     return true;
                 }

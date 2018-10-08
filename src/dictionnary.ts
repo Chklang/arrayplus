@@ -25,9 +25,9 @@ export class Dictionnary<TypeKey extends string | number | boolean, TypeObject> 
         const calculatedKey: string = this.transformKey(key);
         if (this[calculatedKey]) {
             // Already exists
-            this.some((current: TypeObject) => {
-                if (current === this[calculatedKey]) {
-                    this[calculatedKey] = element;
+            this.some((current: TypeObject, index: number) => {
+                if (current === this[index]) {
+                    this[index] = element;
                     return true;
                 }
                 return false;
